@@ -1,0 +1,65 @@
+default_platform(:ios)
+
+platform :ios do
+    desc "Sync Provisioning Profiles"
+    lane :sync_profile do
+        if is_ci?
+            ENV["FL_OUTPUT_DIR"] = "output"
+            ENV["MATCH_KEYCHAIN_NAME"] = "circle.keychain"
+            ENV["MATCH_KEYCHAIN_PASSWORD"] = "circle"
+            create_keychain(
+                name: ENV["MATCH_KEYCHAIN_NAME"],
+                password: ENV["MATCH_KEYCHAIN_PASSWORD"],
+                default_keychain: true,
+                timeout: 1800,
+            )
+            match(type: "appstore", readonly: true)
+            match(type: "development", readonly: true)
+        end
+        match(type: "development", readonly: true)
+    end
+  
+    desc "New iOS build for Counter Demo app"
+    lane :distribution do
+        build_app(
+            scheme: "Runner",
+            archive_path: "./build/Runner.xcarchive",
+            export_method: "development",
+            output_directory: "./build/Runner",
+            export_team_id: "67369282ZY",
+            export_options: {
+                compileBitcode: false,
+                provisioningProfiles: {
+                  "com.buzzvil.FlutterBuzzBooster" => "match Development com.buzzvil.FlutterBuzzBooster",
+                }
+            }
+        )
+        if is_ci?
+            firebase_app_distribution(
+                app: "1:85060254161:ios:a1d6572f51e3f4d35788f0",
+                groups: "fluttertester",
+                service_credentials_file: "../firebase-key.json",
+                release_notes: "Flutter SDK Test App",
+                ipa_path: "./build/Runner/Runner.ipa"
+            )
+        else
+            firebase_app_distribution(
+                app: "1:85060254161:ios:a1d6572f51e3f4d35788f0",
+                groups: "fluttertester",
+                release_notes: "Flutter SDK Test App",
+                ipa_path: "./build/Runner/Runner.ipa"
+            )
+        end
+    end
+
+    lane :bump do |options|
+        increment_version_number_in_xcodeproj(version_number: options[:version_number])
+        increment_build_number_in_xcodeproj(build_number: options[:build_number])
+        # git_commit(path: "../", message: "[BUMP UP] iOS APP: #{options[:build_number]}")
+        # push_to_git_remote()
+    end
+end
+
+def is_ci?()
+    return ENV["CIRCLECI"] && !ENV["CIRCLECI"].empty?
+end

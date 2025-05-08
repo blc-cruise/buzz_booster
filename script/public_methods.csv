@@ -1,0 +1,6 @@
+method_name,args_name0,args_type0,args_name1,args_type1,args_name2,args_type2
+setUserId,userId,String?
+init,androidAppKey,required String,iosAppKey,required String
+sendEvent,eventName,String,eventValues,"Map<String, String>?"
+showInAppMessage
+showCampaign

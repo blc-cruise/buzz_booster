@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>85060254161-jlevudmrmn4p1iia6ck480l7nct6am2j.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.85060254161-jlevudmrmn4p1iia6ck480l7nct6am2j</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>85060254161-dmkabh8gsuecarupqegfj0bfdr9f1fja.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCsoFTnOWw_MPx8Y__w3ohfyLgz8nlsJes</string>
+	<key>GCM_SENDER_ID</key>
+	<string>85060254161</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.buzzvil.FlutterBuzzBooster</string>
+	<key>PROJECT_ID</key>
+	<string>buzzbooster-e8131</string>
+	<key>STORAGE_BUCKET</key>
+	<string>buzzbooster-e8131.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:85060254161:ios:a1d6572f51e3f4d35788f0</string>
+</dict>
+</plist>

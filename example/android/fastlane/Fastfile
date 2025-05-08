@@ -1,0 +1,32 @@
+default_platform(:android)
+
+platform :android do
+  desc "hello android fastlane"
+  gradle(
+      task: 'assemble',
+      build_type: 'Release'
+  )
+  lane :distribution do
+    if is_ci?
+        firebase_app_distribution(
+            app: "1:85060254161:android:e31c603ed03dbcc35788f0",
+            groups: "fluttertester",
+            release_notes: "Android Flutter SDK Test App",
+            service_credentials_file: "../firebase-key.json",
+            apk_path: "../build/app/outputs/apk/release/app-release.apk"
+        )
+    else
+        firebase_app_distribution(
+            app: "1:85060254161:android:e31c603ed03dbcc35788f0",
+            groups: "fluttertester",
+            release_notes: "Android Flutter SDK Test App",
+            firebase_cli_path: "/usr/local/bin/firebase",
+            apk_path: "../build/app/outputs/apk/release/app-release.apk"
+        )
+    end
+  end
+end
+
+def is_ci?()
+    return ENV["CIRCLECI"] && !ENV["CIRCLECI"].empty?
+end
